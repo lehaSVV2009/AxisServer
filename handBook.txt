@@ -1,0 +1,1014 @@
+<Basis>
+
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+
+
+<h2>
+Trail: JavaBeans(TM)
+</h2>
+<blockquote>
+</blockquote>
+
+
+<p>
+JavaBeans привносит в платформу Java компонентную технологию.
+С API JavaBeans вы можете создавать повторно используемые платформенно-независимые компоненты.
+Используя согласующиеся с JavaBeans инструменты построения приложений, вы можете
+комбинировать эти компоненты в аплеты, приложения или композитные компоненты.
+
+Компоненты JavaBean известны как <i>Бины</i>.
+
+<blockquote>
+JavaBeans входит в число базовых возможностей JDK1.1. 
+Любые совместимые с JDK1.1 браузеры или инструменты неявно поддерживают JavaBeans. 
+</blockquote>
+
+Этот документ является практическим пособием по изучению JavaBeans и Beans Development Kit (BDK).
+<font color="#009bbb">JavaBeans API Specification</font>
+предоставляют полное описание JavaBeans. Распечатайте спецификации JavaBeans 
+и держите их под рукой, когда будете работать с этим документом.
+
+
+<p>
+BDK свободно доступны в web.
+Кроме 
+<font color="#009bbb">BDK</font>,  вам понадобится также 
+<font color="#009bbb">Java Development Kit</font> (JDK).
+<p>
+<!--    What is a JavaBean    -->
+<a href=whatis_index.html>
+<b>Концепции JavaBeans и Beans Development Kit</b></a>
+описывает, что такое Бин и описывает Beans Development Kit (BDK).
+
+<p>
+<!--    BeanBox Basics    -->
+<a href=beanbox_index.html>
+<b>Использование BeanBox</b> </a> описывает основные операции BeanBox
+и объясняет меню BeanBox.
+
+<p>
+<!--    Writing a Simple Bean    -->
+<a href=writingbean_index.html>
+<b>Написание простого Бина</b></a> проводит вас через процесс создания 
+элементарного Бина, сохранения Бина, добавления Бина в ToolBox, помещающий Бин в 
+BeanBox, инспектирование свойств и событий Бина и генерацию интроспективного отчета Бина.  
+
+<p>
+<!--    Properties    -->
+<a href=properties_index.html>
+<b>Свойства</b></a> объясняет, как придать вашему Бину свойства:
+характеристики внешнего вида и поведения Бина, <i>настраиваемые во время проектирования</i>.
+
+<p>
+<!--   Events   -->
+<a href=events_index.html>
+<b>Манипулирование событиями в BeanBox</b></a> описывает возможности манипулирования событиями
+BeanBox. Если вы не знакомы с обработкой событий, вы можете захотеть почитать больше про
+<a href= "../uiswing/overview/event.html">Обработку событий</a>, чтобы подготовиться к этому материалу.
+
+<p>
+<!--    BeanInfo    -->
+<a href=beaninfo_index.html>
+<b>Интерфейс BeanInfo</b></a> описывает, как писать классы инфорации Бина:
+отдельные классы, которые вы можете использовать для того, чтобы явно объявлять
+свойства, методы и события вашего Бина для инструментов построения.
+
+<p>
+<!--    Customizing Beans  -->
+<a href=customization_index.html>
+<b>Настройка Бина</b></a> дает вам введение в редакторы свойств и интерфейс <code>Customizer</code>.
+
+<p>
+<!--    Persistence    -->
+<a href=persistence_index.html>
+<b>Сохранение Бина</b></a> объясняет как сохранять и восстанавливать ваши Бины и их настроенное состояниею
+
+<p>
+<!--    Beancontext    -->
+<a href=beancontext_index.html>
+<b>Использование API BeanContext</b></a> - новый урок, который охватывает
+Extensible Runtime Containment and Services Protocol, также известный как 
+beancontext.
+
+
+<h3>Дополнительная документация</h3>
+<p>
+Каталог BDK <code>beans/docs</code> содержит документацию по:                                   
+<ul>
+  <li>Beans API
+  <li>BeanBox API
+  <li>Демонстрационным Бинам
+  <li><code>java.util</code> API
+  <li>JAR-файлам и манифестам
+  <li>Формирующим файлам (makefile) для gnumake (Unix) и nmake (Windows)
+</ul>
+Хорошей стартовой точкой является файл <code>beans/README.html</code>.
+
+<p>
+Страница <font color="#009bbb">JavaBeans Documentation</font>
+содержит текущие определения  JavaBeans API, описание новых возможностей JavaBeans,
+и связанную документацию Java, такую как Java Core Reflection API, Object
+Serialization, Remote Method Invocation (RMI) и список книг от третьих лиц по
+JavaBeans.
+</ul>
+
+</blockquote>
+
+<br>
+</body>
+</html>
+
+
+</Basis>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Rule1>
+
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+<B><FONT SIZE="-1">The Java</font><sup><font size="-2">TM</font></sup> <font size="-1">Tutorial</FONT></B>
+<br>
+
+<br>
+<font size=-1>
+<b>Урок</b>: Концепции JavaBeans и Beans Development Kit 
+</font>
+
+<h2>Концепции JavaBeans </h2>
+<blockquote>
+API JavaBeans дает возможности писать программные компоненты на языке программирования Java.
+Компоненты являются независимыми, повторно используемыми программными модулями,
+которые могут быть визуально объединены в составные компоненты, аплеты, приложения,
+сервлеты с использованием визуальных инструментов построения.
+Компоненты JavaBean известны как <i>Бины</i>.
+<p>
+Компоненты "выставляют" свои характеристики (например, public методы и события)
+инструментам построения для визуального манипулирования.
+Характеристики Бина "выставляются" потому, что именование характеристик придерживается
+определенных <i>шаблонов проектирования</i>.
+Инструмент построения, использующий JavaBeans, может проверять шаблоны Бина,
+и распознавать его характеристики для визуального манипулирования. Инструмент построения
+управляет Бинами на палитре или в ящике инструментов. Вы можете выбрать Бин из ящика инструментов,
+перетащить его на форму, модифицировать его внешний вид и поведение, определить
+его взаимодействия с другими Бинами и включать его и другие Бины в аплет, в приложение или в новый 
+Бин. Все это может быть проделано без написания кода.
+
+<p>
+Следующий список кратко описывает ключевые концепции Бина и ссылается на разделы спецификаций
+JavaBeans, где вы можете прочитать их польное описание.
+<ul>
+<li>Средства построения обнаруживают характеристики Бина (такие как его свойства, методы и события)
+в процессе, известном как <em>интроспекция</em>. Бины поддерживают интроспекцию двумя способами:
+    <ul>
+      <li>Следованиям определенным правилам именования характеристик Бина, известным как 
+          <em>шаблоны проектирования</em>. Класс <code>Introspector</code>
+          проверяет эти шаблоны проектирования Бина, чтобы обнаружить характеристики Бина. 
+          Класс <code>Introspector</code> относится к API 
+          <em>базового отражения</em>. Учебник <em>The Reflection API</em> является
+          хорошим местом, где вы можете изучить отражение.
+      <li>Явно предоставляемой информацией о свойствах, методах и событиях в связанном классе
+          <em>информации Бина</em>. Класс информации Бина реализует интерфейс
+          <code>BeanInfo</code>. Класс <code>BeanInfo</code> явно перечисляет,
+          те характеристики Бина, которые должны быть раскрыты для инструментов построения приложений.
+     </ul>
+    В главе 8 документа <em>JavaBeans API Specification</em> обсуждается интроспекция, шаблоны проектирования и объекты <code>BeanInfo</code>.
+    <p>
+<li><em>Свойства</em> являются характеристиками внешнего вида и поведения Бина,
+    которые могут быть изменены во время проектирования. Инструменты построения
+    интроспектируют Бин для обнаружения его свойств и открывают эти свойства для
+    манипулирования ими. В главе 7 <em>JavaBeans API Specification</em> обсуждаются свойства.
+    <p>
+<li>Бин раскрывает свои свойства так, что они могут быть <em>настроены</em> 
+    во время проектирования. Настройка поддерживается двумя путями: использованием редакторов свойств
+    или использованием более сложных настройщиков Бинов. В главе 9 <em>JavaBeans API Specification</em> 
+    обсуждается настройка Бинов.
+    <p>
+<li>Бин использует <em>события</em> для связи с другими Бинами.
+    Бин, который хочет принимать события (Бин-слушатель) регистрирует свою заинтересованность 
+    у Бина, который возбуждает событие (Бина-источника). Средства построения 
+    могут проверять Бин и определять, какие события этот Бин возбуждает (посылает)
+    и какие он может обрабатывать (принимать).
+    В главе 6 <em>JavaBeans API Specification</em> обсуждаются события.
+    <p>
+<li><em>Персистентность</em> позволяет Бинам сохранять и восстанавливать из состояние.
+    Если вы изменили свойства Бина, вы можете сохранить состояние Бина при восстановлении
+    этого Бин позднее изменения его свойств сохранятся. 
+    JavaBeans использует сериализацию объектов Java для поддержки персистентности.
+    В главе 6 <em>JavaBeans API Specification</em> обсуждается персистентность.
+    <p>
+<li><em>Методы</em> Бинов не отличаются от обычных методов Java и могут быть вызваны
+    из других Бинов или скриптового окружения. По умолчанию все 
+    public-методы экспортируются.
+
+</ul>
+
+<p>Хотя Бины разработаны для понимания их инструментами построения, все их ключеыве
+API, включая поддержку событий, свойств и персистентность разработаны так, чтобы 
+быть легко читаемыми и понимаемыми также и человеком-программистом.</p>
+
+
+</blockquote>
+
+</body>
+</html>
+
+
+
+</Rule1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Rule2>
+
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+<B><FONT SIZE="-1">The Java</font><sup><font size="-2">TM</font></sup> <font size="-1">Tutorial</FONT></B>
+<br>
+
+<font size="-1">
+<b>Урок</b>: Концепции JavaBeans и Beans Development Kit
+</font>
+
+<h2>Beans Development Kit</h2>
+<blockquote>
+BDK распространяется отдельно от JDK. Вы можете выгрузить BDK c Web-сайта
+JavaBeans. Этот сайт содержит инструкции по инсталляции 
+BDK на вашей системе. Здесь дается общее описание файлов и каталогов BDK:
+<ul>
+<li><code>README.html</code> содержит входную точку в документацию BDK
+    <p>
+<li><code>LICENSE.html</code> содержит лицензионное соглашение BDK
+    <p>
+<li><code>GNUmakefile</code> и <code>Makefile</code> являются файлами построения для
+    Unix и Windows (суффиксы <code>.gmk</code> и <code>.mk</code>) демонстрационных примеров и 
+    BeanBox, и для выполнения BeanBox
+    <p>
+<li><code>beans/apis</code> содержит 
+ <ul>
+  <li>каталог <code>java</code>, содержащий исходные файлы JavaBeans 
+  <li>каталог <code>sun</code>, содержащий исходные файлы редактора свойств
+ </ul>
+    <p>
+<li><code>beans/beanbox</code> содержит
+ <ul>
+  <li>файлы построения для BeanBox
+  <li>скрипты для запуска BeanBox
+  <li>каталог <code>classes</code>, содержащий файл класса BeanBox 
+  <li>каталог <code>lib</code>, содержащий поддерживающий BeanBox jar-файл, 
+      используемый результирующим кодом <code>MakeApplet</code>
+  <li>каталоги <code>sun</code> и <code>sunw</code>, содержащие 
+     исходные (<code>.java</code>) файлы  BeanBox
+  <li>каталог <code>tmp</code>, содержащий исходные коды и файлы классов автоматически генерируемых
+     адаптеров событий, файлы <code>.ser</code> и файлы аплетов, автоматически генерируемые
+      <code>MakeApplet</code>
+ </ul>
+    <p>
+<li><code>beans/demos</code> содержит 
+ <ul>
+  <li>файлы для построения демонстрационных примеров Beans
+  <li>каталог HTML содержит демонстрацию оболочки аплета, которая должна выполняться в
+      <code>appletviewer</code>, HotJava или браузере, совместимом с JDK1.1
+  <li>каталог <code>sunw</code> содержит
+    <ul>
+     <li>каталог <code>wrapper</code>, содержащий оболочку аплета Бина
+     <li>каталог <code>demos</code>, содержащий исходные коды демонстрационных примеров
+    </ul>
+ </ul>
+    <p> 
+<li><code>beans/doc</code> содержит
+ <ul>
+  <li>документацию демонстрационных примеров
+  <li>каталог <code>javadoc</code>, содержащий документацию классов и интерфейсов JavaBeans и относящихся к 
+  <li>различную документацию
+ </ul>
+    <p>
+<li><code>beans/jars</code> содержит
+    jar-файлы для Бинов демонстрационных примеров
+
+</ul>
+
+</blockquote>
+
+</body>
+</html>
+
+
+
+
+</Rule2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Rule3>
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+<B><FONT SIZE="-1">The Java</font><sup><font size="-2">TM</font></sup> <font size="-1">Tutorial</FONT></B>
+<br>
+
+<h2>Урок: Написание простого Бина</h2>
+<blockquote>
+В этом разделе вы изучите больше о Бинах и BeanBox путем
+<ul>
+ <li>Создания простого Бина
+ <li>Компиляции и сохранения Бина в Архивном (JAR) файле
+ <li>Загрузки Бина в ToolBox
+ <li>Перетаскивания экземпляра Бина в BeanBox
+ <li>Проверки свойств, методов и событий Бина
+ <li>генерации интроспективного отчета
+</ul>
+
+<p>Ваш Бин будет называться <code>SimpleBean</code>.
+Вот какие шаги нужно проделать, чтобы создать его и просмотреть в BeanBox:
+<ol>
+ <li><b>Написать код <code>SimpleBean</code></b>. Поместить его в файл с именем
+     <code>SimpleBean.java</code>, в каталоге по вашему выбору. Вот этот код:
+<blockquote><pre>   
+import java.awt.*;
+import java.io.Serializable;
+         
+public class SimpleBean extends Canvas
+                        implements Serializable
+{
+    //Constructor sets inherited properties
+    public SimpleBean(){
+        setSize(60,40);
+        setBackground(Color.red);
+    }
+}
+</pre></blockquote>
+<p>  
+<code>SimpleBean</code> расширяет компонент
+<font color="#8800bb"><code>java.awt.Canvas</code></font></a>.
+<code>SimpleBean</code> также реализует интерфейс
+<font color="#8800bb"><code>java.io.Serializable</code></font></a>, это требование для всех Бинов.
+<code>SimpleBean</code> устанавливает фоновый цвет и размер компонента.
+
+ <p>
+ <li><b>Убедиться, что переменная окружения <code>CLASSPATH</code>
+     установлена</b> так, чтобы указывать на все необходимые файлы
+     <code>.class</code> (или <code>.jar</code>). Вот некоторые URL,
+     которые помогут вам правильно установить CLASSPATH:
+     <ul>
+      <li>Урок <font color="#009bbb"><a href=http://www.mipk-kspu.kharkov.ua/local/library/java/java_tutorial/java/interpack/managingfiles.html>Управление исходными файлами и файлами классов</a></font>
+          дает хорошие советы о том, как и <i>когда</i> устанавливать вашу CLASSPATH.
+
+      <li>Страница справок по JDK Tool предоставляет полную информацию по CLASSPATH для платформ Windows
+(<font color="#009bbb">http://java.sun.com/products/jdk/1.1/docs/tooldocs/win32/index.html</font>)
+и Solaris
+(<font color="#009bbb">http://java.sun.com/products/jdk/1.1/docs/tooldocs/solaris/index.html</font>).
+     </ul>
+     <p>
+
+ <li><b>Компиляция Бина:</b>
+     <pre>
+      javac SimpleBean.java
+     </pre>
+     Это создаст файл <code>SimpleBean.class</code>
+     <p>
+ <li><b>Создание файла манифеста </b>. Используйте тот текстовый редактор, который
+     вам нравится для создания файла, мы назовем его <code>manifest.tmp</code>,
+     который содержит следующий текст:
+     <pre>
+     Name: SimpleBean.class
+     Java-Bean: True
+     </pre>
+ <li><b>Создание JAR-файла</b>. JAR-файл будет содержать манифест и файл класса
+     <code>SimpleBean</code>:
+     <pre>
+     jar cfm SimpleBean.jar manifest.tmp SimpleBean.class
+     </pre>
+     См. полную информацию о JAR-файлах в руководствах
+<a href=http://www.mipk-kspu.kharkov.ua/local/library/java/java_tutorial/jar/index.html target="_top">
+JAR Files</a> и        
+<font color="#009bbb">JDK JAR file documentation</font>.
+      <p>
+
+<li><b>Загрузка JAR-файла</b> в ToolBox. выберите пункт меню
+     File|LoadJar... Это вызовет диалог выбора файла. Найдите 
+     <code>SimpleBean.jar</code> и выберите его.
+     <code>SimpleBean</code> появится в верхней части
+     ToolBox. (Заметьте, что когда BeanBox 
+     стартовал, все Бины и JAR-файлы в каталоге
+     <code>beans/jars</code> автоматически загрузились в
+     ToolBox).
+     <p>
+<li><b>Перетаскивание  экземпляра <code>SimpleBean</code> в BeanBox</b>.
+     Щелкните на слове <code>SimpleBean</code> в ToolBox. Курсор превратится в
+     крестик. Переместите курсор на пятно в  
+     BeanBox и щелкните. SimpleBean появится в нарисованном прямоугольнике со штриховой окантовкой.
+     Эта окантовка означает, что <code>SimpleBean</code> выбран. Свойства
+     <code>SimpleBean</code> появятся в панели
+     Properties.
+</ol>
+ 
+<p>Вы можете изменить размеры <code>SimpleBean</code>, поскольку он наследует
+<code>Canvas</code>, путем перетаскивания угла. Вы увидите изменение курсора на 
+правый уголок, когда помещаете его над углом. Вы можете также изменить позицию
+<code>SimpleBean</code> внутри BeanBox путем перетаскивания его за любую неугловую
+часть штриховой окантовки. Вы увидите изменение курсора на скрещенные стрелки,
+когда он будет в позиции, допускающей перемещение Бина.
+
+</blockquote>
+<h3>Формирующие файлы для SimpleBean</h3>
+<blockquote>
+<p>
+Ниже приводятся два формирующих файла (Unix и Windows), обеспечивающих создание  
+<code>SimpleBean</code>.
+
+<blockquote><pre>
+<hr>
+# gnumake file
+
+CLASSFILES= SimpleBean.class
+
+JARFILE= SimpleBean.jar
+
+all: $(JARFILE)
+
+# Create a JAR file with a suitable manifest.
+$(JARFILE): $(CLASSFILES) $(DATAFILES)
+        echo "Name: SimpleBean.class" >> manifest.tmp
+        echo "Java-Bean: True" >> manifest.tmp
+        jar cfm $(JARFILE) manifest.tmp *.class
+        @/bin/rm manifest.tmp
+
+# Compile the sources
+%.class: %.java
+        export CLASSPATH; CLASSPATH=. ; \
+        javac $&lt;
+
+# make clean
+clean:
+        /bin/rm -f *.class
+        /bin/rm -f $(JARFILE)
+<hr>
+</pre></blockquote>
+<p>
+Вот версия для <code>nmake</code> Windows:
+
+<blockquote><pre>
+<hr>
+# nmake file
+CLASSFILES= simplebean.class
+
+JARFILE= simplebean.jar
+
+all: $(JARFILE)
+
+# Create a JAR file with a suitable manifest.
+
+$(JARFILE): $(CLASSFILES) $(DATAFILES)
+        jar cfm $(JARFILE) &lt;&lt;manifest.tmp *.class
+Name: SimpleBean.class
+Java-Bean: True
+&lt;&lt;
+
+.SUFFIXES: .java .class
+
+{sunw\demo\simple}.java{sunw\demo\simple}.class :
+        set CLASSPATH=.
+        javac $&lt;
+
+clean:
+        -del sunw\demo\simple\*.class
+        -del $(JARFILE)
+</pre></blockquote>
+<p>
+
+Вы можете использовать эти файлы как шаблон для создания формирующих файлов для своих Бинов.
+Демонстрационные формирующие файлы Бинов, находящиеся в каталоге
+<code>beans/demo</code>, также показывают вам как использовать формирующие файлы для создания
+и поддержки ваших Бинов
+</blockquote>
+<p> 
+
+<h3>Проверка свойств и событий SimpleBean</h3>
+<blockquote>
+<p>Панель Properties отображает свойства выбранного Бина. При выбранном
+<code>SimpleBean</code> панель Properties отображает четыре свойства:
+<code>foreground</code>, <code>background</code>, <code>font</code> и <code>name</code>.
+Мы не объявляли свойств в <code>SimpleBean</code>
+(см. раздел <a href="properties_index.html">Свойства</a>, чтобы узнать, как объявлять
+свойства), так что здесь только свойства, унаследованные от
+<code>Canvas</code>. Щеклок на свойстве вызывает редактор свойства.
+BeanBox обеспечивает редакторы свойств по умолчанию для примитивных типов и для типов
+<code>Font</code> и <code>Color</code>. Вы можете найти исходные коды для этих
+редакторов в <code>beans/apis/sun/beans/editors</code>.
+ 
+<p>Бины связываются с другими Бинами путем посылки и получения уведомлений о событиях.
+Чтобы увидеть, какие события может посылать <code>SimpleBean</code> выберите пункт меню BeanBox
+Edit|Events. Будет отображен список событий, сгруппированный  по интерфейсам 
+Java, в котором объявлены методы событий. Под каждым интерфейсом перечисляются его
+методы событий. Все они унаследованы от Canvas.
+ 
+<p>
+Вы можете больше узнать о 
+<a href="properties.html">свойствах</a> и
+<a href="events_index.html">событиях</a> в соответствующих разделах.
+</blockquote>
+ 
+<h3><a name=report>Генерация интроспекционного отчета для Бина</a></h3>
+<blockquote>
+<p>
+Интроспекция - это процесс обнаружения во время проектирования
+свойств Бина одним из двух методов:
+<ul>
+  <li>Низкоуровневым отражением, которое использует шаблоны проектирования
+      для обнаружения свойств ваших Бинов.
+  <li>Проверкой связанного класса 
+      <a href="beaninfo_index.html"><i>информации бина</i></a>,
+      который явно описывает свойства вашего Бина.
+</ul>
+
+<p>Вы можете сгенерировать интроспекционный отчет Бина, выбрав пункт меню
+Edit|Report. Отчет перечисляет события, свойства и методы Бина и их характеристики.
+
+<p>По умолчанию отчет Бина посылается на стандартный вывод интерпретатора
+<code>java</code>, которым является окно, в котором вы стартовали  BeanBox. 
+Вы можете перенаправить отчет в файл изменением команды запуска интерпретатора
+java в <code>beanbox/run.sh</code> или в <code>run.bat</code> на:
+<blockquote><pre>
+java sun.beanbox.BeanBoxFrame &gt; beanreport.txt
+</pre></blockquote>
+
+</blockquote>
+<p>
+
+</blockquote>
+
+</body>
+</html>
+
+
+</Rule3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Rule4>
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+
+<font size="-1">
+<b>Урок</b>: Свойства
+</font>
+
+<h2>
+Простые свойства</h2>
+<blockquote>
+<p>
+<blockquote>
+<hr>Чтобы больше получить от этого раздела прочитайте сначала Главу 7, <i>Свойства</i> и Главу 8 <i>Интроспекция</i> в
+<font color="#009bbb">JavaBeans API Specification</font>.<hr></blockquote>
+
+<p>Свойства являются аспектами внешнего вида и поведение Бинов,
+которые могут быть изменены во время проектирования. Свойства
+являются частными (<code>private</code>) значениями, доступными
+через методы <i>getter</i> и <i>setter</i> (методы-акцессоры). 
+Методы-акцессоры свойств именуются по определенным правилам, называемым
+<i>шаблонами проектирования</i>. С использованием имен методов, базирующихся на шаблонах проектирования, средства построения, работающие
+с JavaBeans (и BeanBox) могут
+
+<ul>
+ <li>Обнаруживать свойства Бина
+ <li>Определять атрибуты чтения/записи свойства
+ <li>Определять тип свойства
+ <li>Находить соответствующий 
+     <a href="customization_index.html">редактор свойства</a>
+     для каждого типа свойства
+ <li>Отображать свойство (обычно в панели свойств)
+ <li>Изменять такие свойства (во время проектирования)
+</ul>
+
+<p>
+Например, средство построения при проверке вашего Бина обнаруживает два метода:
+<blockquote><pre>
+public Color getColor() { ... }
+public void setColor(Color c) { ... }
+</pre></blockquote>
+
+Средство построения делает вывод, что существует свойство по имени
+color, которое можно читать и писать и что его тип - code>Color</code>. 
+Далее средство построения может попытаться 
+<a href="customization_index.html#findEditor">найти
+редактор свойства</a> для этого типа и отобразить свойство (обычно в панели свойств) так, чтобы оно могло редактироваться.
+ 
+</blockquote>
+<h3>Добавление свойства Color в SimpleBean</h3>
+<blockquote>
+<p>
+Сделайте следующие изменения в <code>SimpleBean.java</code>, чтобы
+добавить свойство color:
+ 
+<ol>
+ <li>Создайте и инициализируйте private переменную экземпляра.
+<blockquote><pre>
+private Color color = Color.green; 
+</pre></blockquote>
+ <li>Напишите <code>public</code> метод getter.
+<blockquote><pre>
+public Color getColor(){
+    return color;
+} 
+</pre></blockquote>
+ <li>Напишите <code>public</code> метод setter.
+<blockquote><pre>
+public void setColor(Color newColor){
+    color = newColor;
+    repaint();
+}
+</pre></blockquote>
+ <li>Заместите метод <code>paint()</code>, унаследованный от
+     <code>Canvas</code>.
+<blockquote><pre>
+public void paint(Graphics g) {
+    g.setColor(color);
+    g.fillRect(20, 5, 20, 30);
+}
+</pre></blockquote>
+ <li>Откомпилируйте Бин, загрузите его в ToolBox и создайте его
+     экземпляр в BeanBox.
+</ol>
+ 
+<p>
+Результатом этого будет:
+<ul>
+ <li><code>SimpleBean</code> будет отображаться в зеленом центрированном прямоугольнике.
+ <li>Панель Properties будет содержать новое свойство <code>Color</code>.
+     Механизм интроспекции будет также искать редактор свойства для 
+     <code>Color</code>. Редактор свойства для <code>Color</code> - 
+     один из редакторов по умолчанию, поддерживаемых BeanBox, и он
+     назначается как редактор свойства <code>Color</code> в
+     <code>SimpleBean</code>.
+     Щелкните на свойстве <code>Color</code> в панели Properties,
+     чтобы запустить редактор. Раздел 9.2 в 
+     <font color="#009bbb">JavaBeans API Specification</font>       обсуждает редакторы свойств.</ul>
+
+<p>Вот полный исходный код <code>SimpleBean</code>, измененный для добавления свойства <code>color</code>.
+
+<blockquote><pre>
+package sunw.demo.simple;
+ 
+import java.awt.*;
+import java.io.Serializable;
+ 
+public class SimpleBean extends Canvas
+                        implements Serializable{
+ 
+    private Color color = Color.green;
+ 
+    //property getter method
+    public Color getColor(){
+        return color;
+    }
+ 
+    //property setter method. Sets new SimpleBean
+    //color and repaints.
+    public void setColor(Color newColor){
+        color = newColor;
+        repaint();
+    }
+ 
+    public void paint(Graphics g) {
+        g.setColor(color);
+        g.fillRect(20, 5, 20, 30);
+    }
+ 
+    //Constructor sets inherited properties
+    public SimpleBean(){
+        setSize(60,40);
+        setBackground(Color.red);
+    }
+}
+</pre></blockquote> 
+<p>
+</blockquote>
+
+</body>
+</html>
+
+</Rule4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Rule5>
+
+
+<html>
+<body BGCOLOR="#ffffff" LINK="#000099">
+<font size="-1">
+<b>Урок</b>: Свойства
+</font>
+
+<h2>Связанные свойства</h2>
+<blockquote>
+<p>
+<blockquote>
+<hr>
+Вот список для дополнительного чтения, чтобы подготовить вас к изучению
+граничных свойств:
+<ul>
+ <li>Глава 7 в <font color="#009bbb">JavaBeans API Specification</font>
+ <li>
+<font color="#8800bb"><code>PropertyChangeListener</code> interface</font> в документации по API
+ <li><font color="#8800bb"><code>PropertyChangeSupport</code> class </font>  в документации по API
+ <li>
+<font color="#8800bb"><code>PropertyChangeEvent</font>
+ class</code>  в документации по API
+</ul>
+<hr></blockquote>
+
+<p>
+Иногда, когда свойства Бина меняются, другой объект может захотеть, чтобы его известили об изменении и реагировать на это изменение.
+Когда меняется  <i>связанное свойство</i>, извещение об изменении посылается заинтересованным слушателям.
+<p>Бин, содержащий связанное свойство должен поддерживать список
+слушателей изменения свойства и сигнализировать этим слушателям, 
+когда связанное свойство изменяется.
+Удобный класс <code>PropertyChangeSupport</code> реализует методы, 
+которые добавляют и удаляют объекты <code>PropertyChangeListener</code> в списке и генерируют объекты <code>PropertyChangeEvent</code> для таких слушателей, когда связанное свойство изменяется.
+Ваши Бины могут наследовать этому классу или использовать его как внутренний класс.
+
+<p>Объект, который хочет прослушивать изменения свойства, должен быть
+в состоянии добавить и удалить себя в списке слушателей Бина, содержащего связанное свойство, и отвечать методу извещения о событии, 
+который сигнализирует об изменении свойства.
+Путем реализации интерфейса <code>PropertyChangeListener</code> 
+слушатель может быть добавлен к списку, поддерживаемому Бином со
+связанным свойством, и, поскольку он реализует метод
+<code>PropertyChangeListener.propertyChange</code>, слушатель может
+отвечать на извещения об изменении свойства.
+
+<p>Класс <code>PropertyChangeEvent</code> инкапсулирует информацию
+об изменении свойств и посылается из источника события изменения
+свойства каждому объекту в списке слушателей изменений свойства
+через метод <code>propertyChange</code>.
+
+<p>Следующие разделы сообщают подробности реализации связанных свойств.
+
+</blockquote>
+<h3>Реализация поддержки связанного свойства в Бине</h3>
+<blockquote>
+<p>Чтобы реализовать связанное свойство, предпримите следующие шаги:
+<ol>
+  <li><b>Импортируйте пакет <code>java.beans</code></b>.
+  Это даст вам доступ к классу <code>PropertyChangeSupport</code>.
+  <p>
+  <li><b>Создайте экземпляр объекта PropertyChangeSupport</b>:
+<blockquote><pre>
+private PropertyChangeSupport changes =
+            new PropertyChangeSupport(this);
+</pre></blockquote>
+      Этот объект поддерживает список слушателей изменения свойства
+      и генерирует события изменения свойства. Вы можете также
+      сделать ваш класс подклассом <code>PropertyChangeSupport</code>.       <p>
+  <li><b>Реализуйте методы для поддержки списка слушателей  
+      изменений свойства</b>.
+      Поскольку <code>PropertyChangeSupport</code> реализует       эти методы, вы просто делаете оболочку для вызовов методов
+      объекта, поддерживающих изменения свойств:
+<blockquote><pre>
+public void addPropertyChangeListener(
+                PropertyChangeListener l)
+{
+    changes.addPropertyChangeListener(l);
+}
+public void removePropertyChangeListener(
+                PropertyChangeListener l)
+{
+    changes.removePropertyChangeListener(l);
+}
+</pre></blockquote>
+
+  <li><b>Модифицируйте для свойства метод setter, чтобы генерировать 
+      событие изменения свойства, когда свойство изменилось</b>. 's
+      Метод <code>setLabel</code> <code>OurButton</code> выглядит 
+      таким образом:
+<blockquote><pre>
+public void setLabel(String newLabel) {
+    String oldLabel = label;
+    label = newLabel;
+    sizeToFit();
+    changes.firePropertyChange("label", oldLabel, newLabel);
+}
+</pre></blockquote>
+  <p>
+  Заметьте, что <code>setLabel</code> сохраняет старое значение
+  <code>label</code>, потому что и старая и новая метки должны быть
+  переданы в <code>firePropertyChange</code>.
+<blockquote><pre>
+public void firePropertyChange(String propertyName,
+                               Object oldValue, Object newValue)
+</pre></blockquote>
+
+  <p>
+Метод <code>firePropertyChange</code> связывает свои параметры в 
+объект <code>PropertyChangeEvent</code> и вызывает 
+<code>propertyChange(PropertyChangeEvent pce)</code> для каждого
+зарегистрированного слушателя. Старое и новое значения обрабатываются 
+как значения <code>Object</code>. Если значения вашего свойства 
+являются примитивными типами, такими как <code>int</code>, вы должны
+использовать объектную оболочку, такую как <code>java.lang.Integer</code>. События изменения свойств генерируются <i>после</i> того, как свойство изменено.
+</ol>
+
+<p>Когда BeanBox (или другой Beans-интсрумент) распознает шаблоны 
+проектирования для связанных свойств в вашем Бине, вы увидите
+пункт интерфейса <code>propertyChange</code>, когда выберите меню Edit|Events.
+
+<p>Теперь, когда вы придали вашему Бину возможность распространять
+события при изменении связанного свойства, следующий шаг -
+создание слушателя.
+</blockquote>
+
+
+<h3>Реализация слушателей связанных свойств</h3>
+<blockquote>
+<p>
+Чтобы прослушивать события изменения свойств, ваш Бин-слушатель
+должен реализовывать интерфейс <code>PropertyChangeListener</code>. Этот интерфейс содержит один метод:
+<blockquote><pre>
+public abstract void propertyChange(PropertyChangeEvent evt)
+</pre></blockquote>
+Это метод уведомления, который Бин-источник вызывает для всех 
+слушателей изменений свойства в своем списке слушателей изменений свойства.
+
+<p>Итак, чтобы сделать свой класс способным прослушивать события
+изменения свойства и отвечать на них, вы должны:
+<ol>
+  <li><b>Реализовать интерфейс <code>PropertyChangeListener</code></b>.
+<blockquote><pre>
+public class MyClass
+       implements java.beans.PropertyChangeListener,
+		  java.io.Serializable
+</pre></blockquote>
+      <p>
+  <li><b>Реализуйте метод <code>propertyChange</code> в слушателе</b>. 
+      Этот метод должен содержать код, который вам нужно выполнить,
+      когда слушатель получает события изменения свойства.
+      Очень часто, например, это вызов метода setter в классе
+      слушателя: изменение свойства в Бине-источнике влечет за собой
+      изменение свойства в Бине-слушателе. 
+</ol>
+
+<p>Чтобы зарегистрировать интерес в получении уведомления об изменении
+свойства Бина, Бин-слушатель вызывает метод регистрации слушателя 
+Бина-источника. Например:
+<blockquote><pre>
+button.addPropertyChangeListener(aButtonListener);
+</pre></blockquote>
+Или вы можете использовать класс адаптера для подхватывания события
+изменения свойства и последующего вызова соответствующего метода
+в объекте-слушателе. Вот пример, взятый из комментариев в файле <code>beans/demo/sunw/demo/misc/ChangeReporter.java</code>.
+<blockquote><pre>
+OurButton button = new OurButton();
+...
+PropertyChangeAdapter adapter = new PropertyChangeAdapter();
+...
+button.addPropertyChangeListener(adapter);
+...
+class PropertyChangeAdapter implements PropertyChangeListener
+{
+    public void propertyChange(PropertyChangeEvent e)
+    {
+        reporter.reportChange(e);
+    }
+}
+</pre></blockquote>
+
+</blockquote>
+
+<h3>Связанные свойства в BeanBox</h3>
+<blockquote>
+<p>
+BeanBox обрабатывает события связанных свойств так же, как он 
+обрабатывает все события: с использованием адаптера подключения к 
+событию. Классы адаптеров подключения к событиям генерируются 
+средством построения, когда вы соединяете Бин-источник события с 
+Бином-слушателем события. Эти объекты размешаются между источником
+события и слушателем события для обеспечения управления и фильтрации
+доставки событий. Поскольку слушатель событий может зарегистрироваться
+вместе со многими слушателями, которые настраиваются на тот же тип события, адаптеры подключения к событиям могут использоваться для 
+перехватывания события от определенного источника и передачи его 
+должному слушателю события. Это освобождает слушатель события от
+реализации кода, который будет проверять каждое событие, чтобы определить, от того ли источника оно происходит.
+
+См полное обсуждение адаптеров подключения к событиям в разделе 6.7 в JavaBeans API Specification.
+<p>
+Бины <code>OurButton</code> и <code>ChangeReporter</code>
+могут быть использованы для иллюстрации этого приема. Чтобы увидеть, как он работает, предпримите следующие шаги:
+
+<ol> 
+  <li>Удалите экземпляры <code>OurButton</code> и <code>ChangeReporter</code> из BeanBox.
+  <li>Выберите экземпляр <code>OurButton</code> и выберите пункт меню 
+      Edit|Events|propertyChange|propertyChange.
+  <li>Протяните "резиновую ленту" к экземпляру <code>ChangeReporter</code>. Отобразится <code>EventTargetDialog</code> .
+  <li>Выберите <code>reportChange</code> из <code>EventTargetDialog</code>.
+      Исходный код адаптера подключения к событию будет сгенерирован и откомпилирован.
+  <li>Выберите <code>OurButton</code> и измените какие-то из его свойств. Вы увидите доклад об этом в <code>ChangeReporter</code>.
+</ol>
+
+<p>BeanBox скрыто генерирует адаптера подключения к событию. Этот
+адаптер реализует интерфейс <code>PropertyChangeListener</code> а 
+также генерирует реализацию метода <code>propertyChange</code>, который
+вызывает метод <code>ChangeReporter.reportChange</code>. Вот сгенерированный исходный код адаптера:
+
+<blockquote><pre>
+// Автоматически сгенерированный файл подключения к событию.
+
+package tmp.sunw.beanbox;
+import sunw.demo.misc.ChangeReporter;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
+public class ___Hookup_14636f1560 implements
+            java.beans.PropertyChangeListener, java.io.Serializable {
+
+    public void setTarget(sunw.demo.misc.ChangeReporter t) {
+        target = t;
+    }
+
+    public void propertyChange(java.beans.PropertyChangeEvent arg0) {
+        target.reportChange(arg0);
+    }
+
+    private sunw.demo.misc.ChangeReporter target;
+}
+</pre></blockquote>
+
+<p>
+Бин <code>ChangeReporter</code> не нуждается в реализации интерфейса <code>PropertyChangeListener</code>; вместо этого класс адаптера, 
+сгенерированного BeanBox реализует <code>PropertyChangeListener</code>,
+и метод адаптера <code>propertyChange</code> вызывает соответствующий метод в целевом объекте (<code>ChangeReporter</code>).
+
+<p>BeanBox помещает классы адаптеров событий в каталог 
+<code>beans/beanbox/tmp/sunw/beanbox</code>. Когда класс адаптера сгенерирован, вы можете увидеть исходный код адаптера в этом каталоге.
+</blockquote>
+<p>
+
+</blockquote>
+
+</body>
+</html>
+
+
+</Rule5>

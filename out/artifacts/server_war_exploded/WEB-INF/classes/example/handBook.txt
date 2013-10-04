@@ -1,0 +1,43 @@
+<Basis>
+JavaBeans - это технологи€ создани€ компонент многоразового использовани€. ≈сли вы программировали на Delphi или на Visual Basic, наверн€ка вам приходилось использовать 
+компоненты, из которых вы, как из конструктора, строили приложени€. 
+JavaBeans сравнима по сути с компонентами Delphi или элементами ActiveX. 
+ƒл€ разработки JavaBeans используетс€ BDK (Beans Development Kit).
+
+ омпонент JavaBeans должен отвечать нескольким услови€м:
+- способность к инициализации нового экземпл€ра, JavaBeans не может быть интерфейсом или абстрактным классом;
+- наличие коструктора по умолчанию, то-есть конструктора без параметров;
+- поддержка сериализации, в классе должен быть реализован интерфейс Serializable или Externalizable, дл€ поддержки записи и чтени€ данных компонента в поток и из потока.
+
+ѕри создании компонента следует придерживатьс€ стандарта проектировани€, который можно уложить в 5 правил:
+</Basis>
+<Rule1>
+1. ƒл€ доступа к свойствам следует использовать методы 
+PropertyType getProperty(); 
+и 
+setProperty(PropertyType property);
+“ак, дл€ доступа к свойству color типа Color, мы будем использовать методы 
+Color getColor();
+и
+void setColor(Color color);
+</Rule1>
+<Rule2>
+2. ≈сли свойсто имеет тип boolean, следует вместо префикса get использовать is. Ќапример: isTrue().
+</Rule2>
+<Rule3>
+3. ƒопускаетс€ использовани€ индексированного свойства, если нужно организовать доступ к свойству-массиву. Ќапример: 
+Color getRainbow(int i);
+void setRainbow(Color color, int i);
+либо можно использовать такие методы:
+Color[] getRainbow();
+void setRainbow(Color[] colors);
+</Rule3>
+<Rule4>
+4. ѕри создании событи€ следует использовать описанный ниже стандартный подход, где
+ интерфейс EventListenerType наследует интерфейс java.util.EventListener:
+ public void addEventListenerType(EventListenerType event);
+ public void removeEventListenerType(EventListenerType event);
+</Rule4>
+<Rule5>
+asdasda
+</Rule5>
